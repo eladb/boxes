@@ -1,0 +1,29 @@
+<html>
+
+<table border="1">
+
+<tr>
+	<th>id</th>
+	<th>drop time</th>
+	<th>drop location</th>
+	<th>message</th>
+	<th>pick up time</th>
+	<th>pick up user</th>
+</tr>
+
+{% for entry in history %}
+
+<tr>
+	<td>{{ entry.boxid }}</td>
+	<td>{{ entry.drop_timestamp }}</td>
+	<td>{{ entry.drop_location }}</td>
+	<td>{{ entry.drop_message }}</td>
+	<td>{{ entry.next_picker_timestamp }}</td>
+	<td>{{ entry.next_picker }}</td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+</html>

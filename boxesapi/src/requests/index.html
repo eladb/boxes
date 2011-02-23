@@ -1,0 +1,46 @@
+<html>
+	
+	<head>
+		<style>
+			table
+			{
+				border-collapse: collapse;
+			}
+			td
+			{
+				padding-right: 30px;
+			}
+			th
+			{
+				text-align: left;
+				background-color: silver;
+			}
+		</style>
+		
+	</head>
+	
+	<body>
+		
+		<table>
+
+		<tr>
+			<th>Summary</th>
+			<th colspan="2">Usage</th>
+		</tr>
+
+		{% for r in reqs %}
+		
+			{% for u in r.usages %}
+				<tr>
+					<td>{{ r.doc }}</td>
+					<td><a href='{{ r.url }}{{ u.sample }}'><code>{{ r.url }}{{ u.usage }}</code></a></td>
+					<td>{{ u.doc }}</td>
+				</tr>
+			{% endfor %}
+			
+		{% endfor %}
+
+		</table>
+		
+	</body>
+</html>
