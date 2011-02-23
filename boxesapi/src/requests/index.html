@@ -33,7 +33,7 @@
 			{% for u in r.usages %}
 				<tr>
 					<td>{{ r.doc }}</td>
-					<td><a href='{{ r.url }}{{ u.sample }}'><code>{{ r.url }}{{ u.usage }}</code></a></td>
+					<td><a target='_blank' href='{{ r.url }}{{ u.sample }}'><code>{{ r.url }}{{ u.usage }}</code></a></td>
 					<td>{{ u.doc }}</td>
 				</tr>
 			{% endfor %}

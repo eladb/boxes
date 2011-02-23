@@ -2,9 +2,6 @@ import model
 import tile
 import request
 import apidocs
-import os
-
-from google.appengine.ext.webapp import template
 
 class MapRequest(request.Request):
     """Returns a map of all the dropped boxes in a certain geo-location"""
@@ -17,7 +14,7 @@ class MapRequest(request.Request):
     def get_usages(cls):
         htmldoc = "adding the 'html=yes' attribute will return an html page with the map"
         return [
-            apidocs.UsageDoc("?quad_prefix=<i>quad key prefix</i>[&html=yes]", 'queries by geo-quad-key prefix. ' + htmldoc, '?quad_prefix=122112223231103'),
+            apidocs.UsageDoc("?quad_prefix=<i>quad key prefix</i>[&html=yes]", 'queries by geo-quad-key prefix. ' + htmldoc, '?quad_prefix=1221122232311&html=yes'),
             apidocs.UsageDoc('?lat=<i>latitide</i>&long=<i>longitude</i>&zoom=<i>zoom level</i>[&html=yes]', 'queries by lat,long and zoom level. ' + htmldoc, '?lat=32.08&long=34.78&zoom=13') ]
     
     def get(self):

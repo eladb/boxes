@@ -1,5 +1,3 @@
-from google.appengine.ext import db
-
 import model
 import tile
 import request
@@ -36,5 +34,5 @@ class PopulateRequest(request.Request):
         self.create_box("mybox1", 32.089047, 34.78024)
         self.create_box("mybox2", 32.091919, 34.78130)
         self.create_box("mybox3", 32.088201, 34.78229)
-        self.create_box("mybox3", 32.085847, 34.77930)
+        self.create_box("mybox4", 32.085847, 34.77930)
         self.response.out.write('storage re-populated.')
