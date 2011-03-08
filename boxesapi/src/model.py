@@ -64,3 +64,28 @@ class History(DictModel):
     @classmethod
     def get_last_drop(cls, boxid):
         return cls.query_by_boxid(boxid).fetch(1)[0]
+
+class MyBox(DictModel):
+    """Stores information about boxes I currently hold (that I picked up)"""
+    userid = db.StringProperty(required = True)
+    boxid = db.StringProperty(required = True)
+    picked_at = db.GeoPtProperty()
+    picked_timestamp = db.DateTimeProperty(auto_now_add = True)
+    drop_message = db.StringProperty()
+
+class PointOfInterest(DictModel):
+    id = db.StringProperty(required = True)
+    url = db.StringProperty()
+    name = db.StringProperty()
+    location = db.GeoPtProperty()
+    address = db.StringProperty(multiline = True)
+    
+    @classmethod
+    def query_by_id(cls, id):
+        return PointOfInterest.all().filter('id =', id)
+
+    @classmethod
+    def is_exist(cls, id):
+        result = cls.query_by_id(id)
+        return result.count() > 0 
+        

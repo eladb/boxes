@@ -13,7 +13,7 @@ class PickupRequest(request.Request):
     
     @classmethod
     def get_usages(cls):
-        return [ apidocs.UsageDoc('?boxid=<i>boxid</i>', 'pick up a dropped box', '?boxid=aghib3hlc2FwaXIJCxIDQm94GEMM') ]
+        return [ apidocs.UsageDoc('?boxid=<i>boxid</i>&token=<i>token</i>', 'pick up a dropped box', '?boxid=aghib3hlc2FwaXIJCxIDQm94GEMM&token=1234') ]
     
     def find_my_dropped_box(self, boxes_by_location, boxid):
         for dropped_box in boxes_by_location:
@@ -25,8 +25,13 @@ class PickupRequest(request.Request):
     def get(self):
         if not self.required_field('boxid'): return
 
+        # validate token
+        userid = self.userid_from_token()
+        if not userid: return
+
         # make sure last drop is still not picked up already
         boxid = self.request.get('boxid')
+        
         last_drop = model.History.get_last_drop(boxid)
         
         # if the next picker timestamp exist, return an error
@@ -35,9 +40,12 @@ class PickupRequest(request.Request):
             return
 
         last_drop.next_picker_timestamp = datetime.datetime.utcnow()
-        last_drop.next_picker = "1245"
-        
+        last_drop.next_picker = userid
         last_drop.put()
+
+        # add to my boxes
+        mybox = model.MyBox(userid = userid, boxid = boxid, picked_at = last_drop.drop_location, drop_message = last_drop.drop_message)
+        mybox.put()
         
         boxes_by_location = model.DroppedBox.query_by_location(last_drop.drop_location.lat, last_drop.drop_location.lon, 18)
         

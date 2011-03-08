@@ -1,9 +1,14 @@
 application: boxesapi
-version: 1
+version: 2
 runtime: python
 api_version: 1
 
 handlers:
+- url: /cydia
+  static_dir: cydia
+  
 - url: /.*
   script: main.py
 
+builtins:
+- datastore_admin: on

@@ -37,9 +37,13 @@ class Request(webapp.RequestHandler):
     def required_field(self, fieldname):
         if not self.field_provided(fieldname):
             self.bad_request("missing parameter: %s" % fieldname)
-            self.missing_param(fieldname)
             return False
         return True
+
+    def userid_from_token(self):
+        if not self.required_field('token'): return None
+        # TODO: in the meantime, token==userid
+        return self.request.get('token')
 
     @classmethod
     def get_apidocs(cls):

@@ -12,12 +12,14 @@ class DropRequest(request.Request):
     
     @classmethod
     def get_usages(cls):
-        return [ apidocs.UsageDoc('?boxid=<i>boxid</i>&lat=<i>latitude</i>&long=<i>longitude</i>[&message=<i>message</i>]', 'drops a box at the specified location, optionally including a message', '?boxid=aghib3hlc2FwaXIJCxIDQm94GEMM&lat=32.089046&long=34.78020') ]
+        return [ apidocs.UsageDoc('?boxid=<i>boxid</i>&lat=<i>latitude</i>&long=<i>longitude</i>[&message=<i>message</i>]&token=<i>user token</i>', 'drops a box at the specified location, optionally including a message') ]
     
     def get(self):
         if not self.required_field('boxid'): return
         if not self.required_field('lat'): return
         if not self.required_field('long'): return
+        userid = self.userid_from_token()
+        if not userid: return;
         
         boxid = self.request.get('boxid')
         lat = float(self.request.get('lat'))
@@ -43,5 +45,9 @@ class DropRequest(request.Request):
         dropped.drop_location = new_entry.drop_location
         dropped.drop_message = message
         dropped.put()
+        
+        # remove from my boxes
+        myBoxes = model.MyBox.all().filter('userid =', userid).filter('boxid =', boxid)
+        for b in myBoxes: b.delete()
         
         self.emit_text("box dropped")

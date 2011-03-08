@@ -16,6 +16,7 @@
 {
     [settings release];
     [location release];
+    [user release];
     [super dealloc];
 }
 
@@ -26,6 +27,7 @@
     {
         settings = [settingsModule retain];
         location = [locationModule retain];
+        user = [BZUser new];
     }
     
     return self;
@@ -34,7 +36,8 @@
 // creates a request for a specific query.
 - (ASIHTTPRequest*)requestWithQuery:(NSString*)queryString
 {
-    NSString* url = [NSString stringWithFormat:@"%@/%@", [settings homeUrl], queryString];
+    NSString* urlEncodedQueryString = [queryString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString* url = [NSString stringWithFormat:@"%@/%@&token=%@", [settings homeUrl], urlEncodedQueryString, user.token];
     NSLog(@"request: %@", url);
     ASIHTTPRequest* req = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:url]];
     return req;

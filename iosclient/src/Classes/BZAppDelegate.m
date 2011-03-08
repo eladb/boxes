@@ -7,8 +7,9 @@
 //
 
 #import "BZAppDelegate.h"
-#import "BZNearByView.h"
-#import "BZNearByMapView.h"
+#import "BZPickupView.h"
+#import "BZDropView.h"
+#import "BZDiagnosticsView.h"
 
 @implementation BZAppDelegate
 
@@ -26,6 +27,7 @@
     [location release];
     [settings release];
     [backend release];
+    
     [super dealloc];
 }
 
@@ -38,13 +40,19 @@
     
     controller = [UITabBarController new];
 
-    UINavigationController* listNavigation = [[[UINavigationController alloc] initWithRootViewController:[[BZNearByView new] autorelease]] autorelease];
-    listNavigation.tabBarItem.title = @"List";
+    UINavigationController* pickupNav = [[[UINavigationController alloc] initWithRootViewController:[[BZPickupView new] autorelease]] autorelease];
+    pickupNav.tabBarItem.title = @"Pick-up";
+    pickupNav.tabBarItem.image = [UIImage imageNamed:@"06-magnify.png"];
+
+    UINavigationController* dropNav = [[[UINavigationController alloc] initWithRootViewController:[[BZDropView new] autorelease]] autorelease];
+    dropNav.tabBarItem.title = @"Drop";
+    dropNav.tabBarItem.image = [UIImage imageNamed:@"07-map-marker.png"];
     
-    UINavigationController* mapNavigation = [[[UINavigationController alloc] initWithRootViewController:[[BZNearByMapView new] autorelease]] autorelease];
-    mapNavigation.tabBarItem.title = @"Map";
+    UINavigationController* diagNav = [[[UINavigationController alloc] initWithRootViewController:[[BZDiagnosticsView new] autorelease]] autorelease];
+    diagNav.tabBarItem.title = @"Diag";
+    diagNav.tabBarItem.image = [UIImage imageNamed:@"20-gear2.png"];
     
-    [controller setViewControllers:[NSArray arrayWithObjects:listNavigation,mapNavigation,nil]];
+    [controller setViewControllers:[NSArray arrayWithObjects:pickupNav,dropNav,diagNav,nil]];
                                     
     [window addSubview:controller.view];
     [window makeKeyAndVisible];

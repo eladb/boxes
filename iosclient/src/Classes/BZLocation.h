@@ -14,9 +14,13 @@
 {
     CLLocationManager *manager;
     BZSettings* settings;
+    
+    CLLocation* simulatedLocation;
+    CLLocation* realLocation;
 }
 
-@property (nonatomic, readonly) CLLocation *currentLocation;
+@property (nonatomic, readonly) CLLocation *currentLocation; // the current location (simulated or real).
+@property (nonatomic, retain) CLLocation* simulatedLocation; // gets or sets simulated location. if set to nil, this means we are using real location.
 
 // init
 - (id)initWithSettings:(BZSettings*)settingsModule;

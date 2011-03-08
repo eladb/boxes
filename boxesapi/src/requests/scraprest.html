@@ -1,0 +1,24 @@
+<html>
+	<body>
+		<table>
+			<tr>
+				<th>id</th>
+				<th>name</th>
+				<th>address</th>
+				<th>location</th>
+				<th>url</th>
+				<th>is_new</th>
+			</tr>
+			{% for venue in venues %}
+			<tr>
+				<td>{{ venue.id }}</td>
+				<td>{{ venue.name }}</td>
+				<td>{{ venue.address }}</td>
+				<td>{{ venue.geocode.lat }}, {{ venue.geocode.lng }}</td>
+				<td><a href='{{ venue.url }}'>{{ venue.url }}</a></td>
+				<td>{{ venue.is_new }}</td>
+			</tr>
+			{% endfor %}
+		</table>
+	</body>
+</html>

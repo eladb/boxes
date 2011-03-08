@@ -19,7 +19,4 @@
 // the zoom level to request when sending the map request
 - (NSInteger)mapRequestZoomLevel;
 
-// returns true if we should simulate the user's location or use the actual location.
-- (BOOL)simulateLocation;
-
 @end

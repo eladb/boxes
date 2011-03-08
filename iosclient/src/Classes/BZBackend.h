@@ -11,12 +11,14 @@
 #import "ASIHTTPRequest.h"
 #import "BZSettings.h"
 #import "BZLocation.h"
+#import "BZUser.h"
 
 // performs calls to the boxes backend service.
 @interface BZBackend : NSObject
 {
     BZLocation* location;
     BZSettings* settings;
+    BZUser* user;
 }
 
 // init

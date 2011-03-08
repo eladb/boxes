@@ -7,24 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BZNearByView.h"
 #import "BZLocation.h"
 #import "BZSettings.h"
 #import "BZBackend.h"
 
 @interface BZAppDelegate : NSObject <UIApplicationDelegate> 
 {
-    UIWindow *window;
-    BZLocation *location;
-    BZBackend *backend;
-    BZSettings *settings;
+    UIWindow* window;
+    BZLocation* location;
+    BZBackend* backend;
+    BZSettings* settings;
     UITabBarController* controller;
 }
 
-@property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, readonly) BZLocation *location;
-@property (nonatomic, readonly) BZSettings *settings;
-@property (nonatomic, readonly) BZBackend *backend;
+@property (nonatomic, retain) IBOutlet UIWindow* window;
+@property (nonatomic, readonly) BZLocation* location;
+@property (nonatomic, readonly) BZSettings* settings;
+@property (nonatomic, readonly) BZBackend* backend;
 
 @end
 

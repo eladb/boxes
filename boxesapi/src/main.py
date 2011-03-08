@@ -1,3 +1,6 @@
+from google.appengine.dist import use_library
+use_library('django', '0.96')
+
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 
@@ -9,6 +12,8 @@ import requests.map
 import requests.pickup
 import requests.history
 import requests.control
+import requests.my
+import requests.scraprest
 
 all_requests = [ requests.index.IndexRequest, 
                  requests.map.MapRequest, 
@@ -17,7 +22,9 @@ all_requests = [ requests.index.IndexRequest,
                  requests.drop.DropRequest,
                  requests.pickup.PickupRequest,
                  requests.history.HistoryRequest,
-                 requests.control.ControlRequest ]
+                 requests.control.ControlRequest,
+                 requests.my.MyRequest,
+                 requests.scraprest.ScrapRestRequest ]
 
 url_mapping = [ (r.get_url(), r) for r in all_requests ] 
 
