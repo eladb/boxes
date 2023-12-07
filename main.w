@@ -1,12 +1,14 @@
 bring cloud;
 
 let b = new cloud.Bucket();
-new cloud.Queue();
+let q = new cloud.Queue();
 
 let api = new cloud.Api();
 
 api.get("/", inflight () => {
   b.put("hello.txt", "world");
+  q.push("new message");
+
   return { status: 200, body: "hello, barak" };
 });
 
