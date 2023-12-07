@@ -9,3 +9,7 @@ api.get("/", inflight () => {
   b.put("hello.txt", "world");
   return { status: 200, body: "hello, barak" };
 });
+
+test "show me the url" {
+  log(api.url);
+}
